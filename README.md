@@ -41,7 +41,7 @@ python -m venv .venv
 ### 3. Instalar as dependências
 
 ```powershell
-python -m pip install fastapi uvicorn
+python -m pip install -r requirements.txt
 ```
 
 ### 4. Iniciar a aplicação
