@@ -12,10 +12,14 @@ app.include_router(financial_router)
 #FREE CORS - tests and development
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials= True,
-    allow_methods=["*"],
-    allow_headers=["*"]
+    allow_origins=["https://myfinancialcontroler.com",
+                   "https://meu-app-contorole-financeiro.com",
+                   "http://localhost:8000/financial",
+                   "http://127.0.0.1:5500"
+                   
+                   ],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["Content-Type", "Authorization"]
 )
 
 

@@ -18,6 +18,6 @@ def get_transactions():
 def create_a_new_transaction(transaction: Transaction):
     return create_transaction(transaction)
 
-@router.get("/amount")
+@router.get("/balance")
 def get_amount():
     return balance_calculation()

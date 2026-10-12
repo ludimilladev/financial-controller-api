@@ -1,21 +1,42 @@
-from app.database.database_teste import transactions
+from app.database.mogodb import transactions_collection
 from app.models.transaction_model import Transaction
 
 
-def list_transactions():
-    return transactions
-
-def create_transaction(transaction: Transaction):
-    transactions.append(transaction.model_dump())
+def format_transaction(transaction):
+    transaction["_id"] = str(transaction["_id"])
     return transaction
 
-def balance_calculation():
 
-    balance = 0;
+
+
+def list_transactions():
+    transactions = list(transactions_collection.find())
+    return [format_transaction(t) for t in transactions]
+
+
+
+def create_transaction(transaction: Transaction):
+
+    data = transaction.model_dump()
+
+    result = transactions_collection.insert_one(data)
+
+    new_transaction = transactions_collection.find_one(
+        {"_id": result.inserted_id}
+    )
+
+    return format_transaction(new_transaction)
+
+
+def balance_calculation():
+    transactions = list(transactions_collection.find())
+
+    balance = 0
+
     for t in transactions:
-        if(t["transaction_type"] == "inflow"):
+        if t["transaction_type"] == "inflow":
             balance += t["amount"]
         else:
             balance -= t["amount"]
 
-    return {"balance": balance}
+    return {"balance" : balance}
