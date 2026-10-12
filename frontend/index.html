@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Controller</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <h1 class="app-title">Financial Controller</h1>
+        <p class="subtitle">Be aware of your spending.</p>
+   
+        <div class="balance-container">
+            <p class="balance-title">Amount</p>
+           
+            <div class="icon-balance">
+                    <div class="p-balance">
+                         <p class="balance" id="balance">R$ 5000.00</p>
+                    </div>
+                    <div class="icon-fa-wallet">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                   
+                    
+            </div>
+                
+     
+            
+        </div>
+
+        <div class="inflow-outflow-container">
+            <div class="inflow-container">
+                <p class="inflow">Inflow</p>
+                <p class="inflow-value" id="inflows">R$ 0</p>
+            </div>
+            <div class="outflow-container">
+                <p class="outflow">Outflow</p>
+                <p class="outflow-value" id="outflows">R$ 0</p>
+            </div>
+        </div>
+       
+        
+
+        <section class="new-transaction-container">
+            <div class="inputs-container">
+                <input type="text" placeholder="Description" class="description-input" id="description-input">
+
+                <input type="text" placeholder="Amount" class="amount-input" id="transaction-amount">
+
+                <details id="transaction-dropdown">
+                    <summary>Transaction type</summary>
+                    <ul class="transaction-type-list" id="transaction-type">
+                        <li data-value="inflow">inflow</li>
+                        <li data-value="outflow">Outflow</li>
+                    </ul>
+                </details>
+
+                <input type="text" placeholder="Category" class="category-input" id="transaction-category">
+
+                <div class="transaction-btn">
+                    <button class="t-btn" id="transaction-btn">Add new transaction</button>
+                </div>
+            </div>
+            
+        </section>
+
+        <section class="transaction-list-container">
+            <h2>Transactions</h2>
+            <ul id="transaction-list" class="transaction-list"></ul>
+        </section>
+
+
+        
+    </div>
+    
+    
+
+    <script src="script.js"></script>
+    <script src="menu-dropdown.js"></script>
+</body>
+</html>
