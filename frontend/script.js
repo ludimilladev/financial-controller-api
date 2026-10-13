@@ -26,6 +26,16 @@ function render(){
             <div class="transaction-list-li">
                 <p>${t.description}</p>
                 <p>R$ ${t.amount}</p>
+                <div class="transaction-icons-container">
+
+                
+                    <button><i class="fa-solid fa-pen-to-square"></i></button>
+                    
+                    <button><i class="fa-solid fa-trash"></i></button>
+                    
+                
+                </div>
+                
             </div>
             
         

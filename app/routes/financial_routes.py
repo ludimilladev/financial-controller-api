@@ -14,10 +14,16 @@ router = APIRouter(prefix="/financial", tags=["Financial"])
 def get_transactions():
     return list_transactions()
 
-@router.post("/transaction")
+@router.post("/transactions")
 def create_a_new_transaction(transaction: Transaction):
     return create_transaction(transaction)
 
 @router.get("/balance")
 def get_amount():
     return balance_calculation()
+
+@router.put("transaction/{transaction_id}")
+def update_transaction(transaction: Transaction):
+    return
+
+    
