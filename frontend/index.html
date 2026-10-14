@@ -1,36 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Financial Controller</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" />
 </head>
+
 <body>
     <div class="app-container">
         <h1 class="app-title">Financial Controller</h1>
         <p class="subtitle">Be aware of your spending.</p>
-   
+
         <div class="balance-container">
             <p class="balance-title">Amount</p>
-           
+
             <div class="icon-balance">
-                    <div class="p-balance">
-                         <p class="balance" id="balance">R$ 0</p>
-                    </div>
-                    <div class="icon-fa-wallet">
-                        <i class="fa-solid fa-wallet"></i>
-                    </div>
-                   
-                    
+                <div class="p-balance">
+                    <p class="balance" id="balance">R$ 0</p>
+                </div>
+                <div class="icon-fa-wallet">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
             </div>
-                
-     
-            
         </div>
 
         <div class="inflow-outflow-container">
@@ -43,14 +42,12 @@
                 <p class="outflow-value" id="outflows">R$ 0</p>
             </div>
         </div>
-       
-        
 
         <section class="new-transaction-container">
             <div class="inputs-container">
-                <input type="text" placeholder="Description" class="description-input" id="description-input">
+                <input type="text" placeholder="Description" class="description-input" id="description-input" />
 
-                <input type="text" placeholder="Amount" class="amount-input" id="transaction-amount">
+                <input type="text" placeholder="Amount" class="amount-input" id="transaction-amount" />
 
                 <details id="transaction-dropdown">
                     <summary>Transaction type</summary>
@@ -60,13 +57,14 @@
                     </ul>
                 </details>
 
-                <input type="text" placeholder="Category" class="category-input" id="transaction-category">
+                <input type="text" placeholder="Category" class="category-input" id="transaction-category" />
 
                 <div class="transaction-btn">
-                    <button class="t-btn" id="transaction-btn">Add new transaction</button>
+                    <button class="t-btn" id="transaction-btn">
+                        Add new transaction
+                    </button>
                 </div>
             </div>
-            
         </section>
 
         <section class="transaction-list-container">
@@ -74,13 +72,75 @@
             <ul id="transaction-list" class="transaction-list"></ul>
         </section>
 
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal-edit-transaction" id="modal-edit">
 
-        
+                <div class="h2-x">
+                    <h2>Transaction</h2>
+                    <button class="close-modal" id="close-modal">
+                        <i class="fa-solid fa-x"></i>
+                    </button>
+
+                </div>
+
+
+                <section class="new-transaction-container">
+                    <div class="inputs-container">
+
+                        <input type="text" placeholder="Description" class="description-input" id="edit-description" />
+
+                        <input type="text" placeholder="Amount" class="amount-input" id="edit-amount" />
+
+                        <details id="edit-dropdown">
+                            <summary>Transaction type</summary>
+                            <ul class="transaction-type-list" id="edit-type">
+                                <li data-value="inflow">inflow</li>
+                                <li data-value="outflow">Outflow</li>
+                            </ul>
+                        </details>
+
+                        <input type="text" placeholder="Category" class="category-input" id="edit-category" />
+
+                        <div class="transaction-btn">
+                            <button class="t-btn" id="save-edit-btn">
+                                UPDATE
+                            </button>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+        <!-- MODAL DE CONFIRMAÇÃO DE EXCLUSÃO -->
+        <div class="modal-overlay" id="delete-overlay">
+            <div class="modal-edit-transaction modal-confirm" role="alertdialog" aria-modal="true"
+                aria-labelledby="delete-title" aria-describedby="delete-text">
+
+                <div class="confirm-icon">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+
+                <h2 id="delete-title">Delete transaction?</h2>
+                <p id="delete-text"></p>
+
+                <div class="modal-actions">
+                    <button class="btn-cancel" id="cancel-delete-btn">Cancel</button>
+                    <button class="btn-danger" id="confirm-delete-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOAST -->
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
     </div>
-    
-    
+
 
     <script src="script.js"></script>
     <script src="menu-dropdown.js"></script>
+    <script src="edit-transaction.js"></script>
 </body>
+
 </html>

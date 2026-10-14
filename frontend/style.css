@@ -241,6 +241,291 @@ summary {
     color: white;
 }
 
+/*===================MODAL===============================*/
+/*===================MODAL===============================*/
+.modal-overlay,
+.modal-edit-transaction {
+    box-sizing: border-box;
+}
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(4px);
+
+    /* estado fechado */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.modal-edit-transaction {
+    background-color: #fff;
+    width: 100%;
+    max-width: 460px;
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+    /* estado fechado */
+    transform: translateY(16px) scale(0.97);
+    transition: transform 0.25s ease;
+}
+
+/* estado aberto */
+.modal-overlay.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.25s ease, visibility 0s;
+}
+
+.modal-overlay.is-open .modal-edit-transaction {
+    transform: translateY(0) scale(1);
+}
+
+/* cabeçalho */
+.h2-x {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #eef1f5;
+}
+
+.h2-x h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.close-modal {
+    background-color: #f1f4f9;
+    border: none;
+    color: #6b7280;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.close-modal:hover {
+    background-color: rgb(23, 113, 231);
+    color: #fff;
+}
+
+/* inputs dentro do modal */
+.modal-edit-transaction input,
+.modal-edit-transaction summary {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.modal-edit-transaction input:focus {
+    border-color: rgb(23, 113, 231);
+    box-shadow: 0 0 0 3px rgba(23, 113, 231, 0.15);
+}
+
+.modal-edit-transaction .transaction-btn button {
+    width: 100%;
+    transition: background-color 0.15s, transform 0.1s;
+}
+
+.modal-edit-transaction .transaction-btn button:hover {
+    background-color: rgb(23, 113, 231);
+}
+
+.modal-edit-transaction .transaction-btn button:active {
+    transform: scale(0.98);
+}
+
+/* MOBILE: bottom sheet */
+@media (max-width: 600px) {
+    .modal-overlay {
+        padding: 0;
+        align-items: flex-end;
+    }
+
+    .modal-edit-transaction {
+        max-width: 100%;
+        max-height: 90dvh;
+        padding: 20px 16px calc(20px + env(safe-area-inset-bottom));
+        border-radius: 20px 20px 0 0;
+        transform: translateY(100%);
+        transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    .modal-overlay.is-open .modal-edit-transaction {
+        transform: translateY(0);
+    }
+
+    /* 16px evita o zoom automático do iOS ao focar no input */
+    .modal-edit-transaction input,
+    .modal-edit-transaction summary {
+        font-size: 16px;
+    }
+
+    .modal-edit-transaction .transaction-btn button {
+        padding: 14px;
+    }
+}
+
+/* respeita quem desativou animações no sistema */
+@media (prefers-reduced-motion: reduce) {
+    .modal-overlay,
+    .modal-edit-transaction {
+        transition: none;
+    }
+}
+
+
+/*===================MODAL DE CONFIRMAÇÃO===============================*/
+@media (min-width: 601px) {
+    .modal-edit-transaction.modal-confirm {
+        max-width: 380px;
+    }
+}
+
+.modal-confirm {
+    text-align: center;
+}
+
+.confirm-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background-color: #fee2e2;
+    color: #dc2626;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-confirm h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.modal-confirm p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #6b7280;
+    margin-bottom: 24px;
+    overflow-wrap: anywhere;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-actions button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.15s, transform 0.1s, opacity 0.15s;
+}
+
+.modal-actions button:active {
+    transform: scale(0.98);
+}
+
+.btn-cancel {
+    background-color: #f1f4f9;
+    color: #374151;
+}
+
+.btn-cancel:hover {
+    background-color: #e5e9f0;
+}
+
+.btn-danger {
+    background-color: #dc2626;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #b91c1c;
+}
+
+.btn-danger:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/*===================TOAST===============================*/
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    z-index: 2000;
+    max-width: calc(100% - 32px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background-color: #111827;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate(-50%, 20px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.toast.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0s;
+}
+
+.toast i {
+    color: #22c55e;
+}
+
+.toast.error i {
+    color: #ef4444;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .toast {
+        transition: none;
+    }
+}
+
 /*<========================RESPONSIVIDADE=================================>*/
 
 @media (max-width: 480px){

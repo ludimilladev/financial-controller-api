@@ -1,6 +1,6 @@
 # Financial Controller
 
-Aplicação de controle financeiro com backend em Python (FastAPI), banco de dados MongoDB e frontend em HTML, CSS e JavaScript. Permite listar transações, criar novas transações e consultar o saldo.
+Aplicação de controle financeiro com backend em Python (FastAPI), banco de dados MongoDB e frontend em HTML, CSS e JavaScript. Permite listar, criar, editar e excluir transações, além de acompanhar o saldo.
 
 O projeto está em desenvolvimento.
 
@@ -10,6 +10,8 @@ O projeto está em desenvolvimento.
 
 - Listar transações.
 - Criar uma nova transação.
+- Editar uma transação existente (PUT).
+- Excluir uma transação (DELETE).
 - Consultar o saldo.
 
 **Frontend**
@@ -17,6 +19,9 @@ O projeto está em desenvolvimento.
 - Exibição do saldo total, das entradas (inflow) e das saídas (outflow).
 - Formulário para adicionar uma transação (descrição, valor, tipo e categoria).
 - Lista de transações com rolagem vertical.
+- Modal de edição de transação, responsivo (centralizado no desktop e no formato bottom sheet no mobile), com animações de abertura e fechamento. Fecha com o botão X, com a tecla ESC ou ao clicar fora dele.
+- Modal de confirmação ao excluir uma transação, com mensagem de sucesso (toast) após apagar.
+- Renderização da lista com `textContent`, evitando a injeção de HTML pelas descrições.
 
 ## Tecnologias
 
@@ -28,7 +33,7 @@ O projeto está em desenvolvimento.
 
 ## Armazenamento dos dados
 
-As transações são armazenadas no MongoDB e persistem após reiniciar a aplicação. A conexão é feita com o PyMongo, e os dados podem ser visualizados com o MongoDB Compass.
+As transações são armazenadas no MongoDB e persistem após reiniciar a aplicação. A conexão é feita com o PyMongo, e os dados podem ser visualizados com o MongoDB Compass. Cada transação é identificada pelo `_id` gerado pelo próprio MongoDB.
 
 ## Pré-requisitos
 
@@ -71,6 +76,17 @@ O comando utiliza a aplicação `app` definida no arquivo `app/main.py`. A opç�
 
 Abra o arquivo HTML do frontend com um servidor local, como a extensão Live Server do VS Code. O frontend se comunica com a API em `http://localhost:8000`.
 
+## Rotas da API
+
+Todas as rotas têm o prefixo `/financial`.
+
+| Método | Rota | Descrição |
+| ------ | ---- | --------- |
+| GET | `/transactions` | Lista as transações |
+| POST | `/transactions` | Cria uma transação |
+| PUT | `/transactions/{id}` | Atualiza uma transação |
+| DELETE | `/transactions/{id}` | Exclui uma transação |
+
 ## Documentação da API
 
 Com o servidor em execução, acesse a documentação interativa para visualizar e testar as rotas:
@@ -87,9 +103,11 @@ O CORS está restrito a uma lista de origens permitidas (frontend em produção 
 - [x] Implementar as funcionalidades iniciais do backend.
 - [x] Integrar a API com um banco de dados para persistir as transações.
 - [x] Desenvolver a interface básica do frontend.
-- [ ] Editar transações (PUT).
-- [ ] Excluir transações (DELETE).
+- [x] Editar transações (PUT).
+- [x] Excluir transações (DELETE).
 - [x] Restringir o CORS para produção.
+- [x] Substituir o `confirm()` nativo por um modal de confirmação.
+- [ ] Adicionar testes automatizados nas rotas (pytest).
 
 ## Objetivo
 
